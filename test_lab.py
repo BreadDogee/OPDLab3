@@ -64,5 +64,14 @@ class TestApp(unittest.TestCase):
         response = self.app.post('/calculate', data=dict(a='!@#', b='$%^', c='&*('), follow_redirects=True)
         self.assertIn('Введите числовое значение для всех коэффициентов', response.data.decode('utf-8'))
 
+    def test_zero_coefficients(self):
+        response = self.app.post('/calculate', data=dict(a=0, b=0, c=0), follow_redirects=True)
+        self.assertIn('Уравнение имеет бесконечное множество корней', response.data.decode('utf-8'))
+
+    def test_zero_minus_coefficients(self):
+        response = self.app.post('/calculate', data=dict(a=-0, b=-0, c=-0), follow_redirects=True)
+        self.assertIn('Уравнение имеет бесконечное множество корней', response.data.decode('utf-8'))
+
+
 if __name__ == '__main__':
     unittest.main()

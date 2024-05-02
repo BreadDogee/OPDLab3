@@ -11,6 +11,9 @@ def calculate_roots(a, b, c):
     except ValueError:
         return 'Введите числовое значение для всех коэффициентов'
 
+    if a == 0 and b == 0 and c == 0:
+        return 'Уравнение имеет бесконечное множество корней'
+
     discriminant = b * b - 4 * a * c
     if discriminant > 0:
         x1 = (-b + (discriminant ** 0.5)) / (2 * a)
